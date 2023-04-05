@@ -56,7 +56,7 @@ class Parser:
 
     # Open the map/graph file and start the parse
     def openAndParse(self):
-        with open(f"../../test/{self.fileName}.txt", "r") as file:
+        with open(f"../test/{self.fileName}.txt", "r") as file:
             lines = file.readlines()
             file.close()
             
