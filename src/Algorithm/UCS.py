@@ -51,7 +51,7 @@ class UCS:
             if (current_node == goal_node): 
                 self.path_result = path + [current_node]
                 self.distance = total_weight
-                return self.path_result, self.distance
+                break
             
             # If the current node is not visited before, add to visited nodes
             if (not (current_node in visited_nodes)):    
