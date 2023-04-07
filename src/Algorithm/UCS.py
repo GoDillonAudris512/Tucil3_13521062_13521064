@@ -1,3 +1,7 @@
+# File : UCS.py
+# Contains the class UCS, that are used for
+# Finding the shortest path on a graph using the UCS algorithm
+
 from queue import PriorityQueue
 
 class UCS:
