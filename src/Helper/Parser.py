@@ -47,6 +47,10 @@ class Parser:
     def getMap(self):
         return self.map
     
+    # Get the heuristic matrix
+    def getHeuristicMap(self):
+        return self.heuristicMap
+    
     # Get the list of node name
     def getNodeName(self):
         return self.nodeName
