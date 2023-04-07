@@ -1,5 +1,5 @@
 from IO.Parser import Parser
-from UCS import UCS
+from Algorithm.UCS import UCS
 
 parse_matrix = Parser("graf")
 parse_matrix.openAndParse()
