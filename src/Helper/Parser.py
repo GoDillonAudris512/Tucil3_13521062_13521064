@@ -87,7 +87,7 @@ class Parser:
 
         # Put all the name of node
         for name in nameList:
-            self.nodeName.append(name)
+            self.nodeName.append(name.strip("\n"))
 
     # Parse every line on lines and fill it to map attribute
     def parseMap(self, lines):
