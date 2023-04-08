@@ -48,7 +48,11 @@ def askFileName():
     global valid, parser, drawer, fileName, canvas, parseExceptionLabel
     valid = False
     graphFile = askopenfilename()
-    fileName.set(graphFile.split("/")[len(graphFile.split("/")) - 1])
+    temp = graphFile.split("/")[len(graphFile.split("/")) - 1]
+    if (len(temp) > 19):
+        fileName.set(temp[:19] + "...")
+    else:
+        fileName.set(temp)
     if (graphFile != ""):
         try:
             parser = Parser(graphFile)
