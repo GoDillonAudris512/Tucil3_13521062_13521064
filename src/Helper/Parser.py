@@ -103,12 +103,12 @@ class Parser:
             
             for j in range(0, self.col):
                 # Check if the element does not follow the format
-                if (i != j and int(line[j]) < 0):
+                if (i != j and float(line[j]) < 0):
                     raise Exception("The weight of the sides of map/graph cannot be < 0")
-                if (i == j and int(line[j]) != 0):
+                if (i == j and float(line[j]) != 0):
                     raise Exception("The map main diagonal elements must be 0")
                 
-                self.map[i][j] = int(line[j])
+                self.map[i][j] = float(line[j])
 
     # Parse every line on lines and fill it to map attribute
     def parseHeuristic(self, lines):
@@ -124,12 +124,12 @@ class Parser:
             
             for j in range(0, self.col):
                 # Check if the element does not follow the format
-                if (i != j and int(line[j]) <= 0):
+                if (i != j and float(line[j]) <= 0):
                     raise Exception("The straight line distance of two node cannot \u2264 0")
-                if (i == j and int(line[j]) != 0):
+                if (i == j and float(line[j]) != 0):
                     raise Exception("The heuristic map main diagonal elements must be 0")
                 
-                self.heuristicMap[i][j] = int(line[j])
+                self.heuristicMap[i][j] = float(line[j])
 
     # Open the map/graph file and start the parse
     def openAndParse(self):
