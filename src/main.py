@@ -117,9 +117,9 @@ def findUCSPath():
     global parser, canvas, algorithmExceptionLabel
     try:
         validateInput()
-        ucs = UCS(parser.getMap(), int(startChosen.get())-1)
+        ucs = UCS(parser.getMap(), int(startChosen.get())-1, parser.getNodeName())
         ucs.find_path_UCS(int(goalChosen.get())-1)
-        # TO DO ..............
+        updateResult(ucs.getPathResult(), ucs.printPathResult(), ucs.getDistance(), 0)
     except Exception as error:
         canvas.itemconfigure(algorithmExceptionLabel, text=error)
 

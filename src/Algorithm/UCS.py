@@ -31,7 +31,7 @@ class UCS:
     def printPathResult(self):
         path_res = ""
         for i in range(0, len(self.path_result)-1):
-            pathName += self.node_name[self.path_result[i]] + " - "
+            path_res += self.node_name[self.path_result[i]] + " - "
         path_res += self.node_name[self.path_result[len(self.path_result)-1]]
         return path_res
     
