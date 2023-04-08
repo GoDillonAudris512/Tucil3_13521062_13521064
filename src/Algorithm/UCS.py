@@ -7,9 +7,10 @@ from queue import PriorityQueue
 class UCS:
 
     # Constructor
-    def __init__(self, adjacency_matrix, start_node):
+    def __init__(self, adjacency_matrix, start_node, node_name):
         self.adjacency_matrix = adjacency_matrix
         self.start_node = start_node
+        self.node_name = node_name
         self.path_result = [] # Notes: 0 means the 1st node, 1 means the 2nd node, etc.
         self.distance = 0
 
@@ -26,16 +27,14 @@ class UCS:
     def getDistance(self):
         return self.distance
     
-    # Display Path
+    # Path Result in Alphabets
     def printPathResult(self):
-        i = 0
-        for node in self.path_result:
-            if (i < len(self.path_result) - 1):
-                print(node + 1, "- ", end = '')
-            else:
-                print(node + 1)
-            i += 1
-
+        path_res = ""
+        for i in range(0, len(self.path_result)-1):
+            pathName += self.node_name[self.path_result[i]] + " - "
+        path_res += self.node_name[self.path_result[len(self.path_result)-1]]
+        return path_res
+    
     # Uniform Cost Search (UCS) Algorithm
     # Find shortest path and distance from start node to goal node    
     def find_path_UCS(self, goal_node):
