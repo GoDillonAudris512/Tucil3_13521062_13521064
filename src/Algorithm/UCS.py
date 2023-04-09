@@ -13,6 +13,7 @@ class UCS:
         self.node_name = node_name
         self.path_result = [] # Notes: 0 means the 1st node, 1 means the 2nd node, etc.
         self.distance = 0
+        self.foundPath = False
 
     # Getter
     def getAdjacencyMatrix(self):
@@ -27,7 +28,11 @@ class UCS:
     def getDistance(self):
         return self.distance
     
+    def getFoundPath(self):
+        return self.foundPath
+    
     # Path Result in Alphabets
+    # Can only be used if foundPath = True
     def printPathResult(self):
         path_res = ""
         for i in range(0, len(self.path_result)-1):
@@ -38,6 +43,7 @@ class UCS:
     # Uniform Cost Search (UCS) Algorithm
     # Find shortest path and distance from start node to goal node    
     def find_path_UCS(self, goal_node):
+        i = 0
         visited_nodes = set()
         node_queue = PriorityQueue()
         node_queue.put((0, self.start_node, []))
@@ -45,11 +51,11 @@ class UCS:
         # There are still nodes to explore
         while (not node_queue.empty()):
             total_weight, current_node, path = node_queue.get()
-
             # Reach goal node
             if (current_node == goal_node): 
                 self.path_result = path + [current_node]
                 self.distance = total_weight
+                self.foundPath = True
                 break
             
             # If the current node is not visited before, add to visited nodes
@@ -60,3 +66,6 @@ class UCS:
                         new_path = path + [current_node]
                         new_distance = total_weight + edge_weight
                         node_queue.put((new_distance, neighbor_node, new_path))
+        
+        if (not self.foundPath):
+            print("Lintasan tidak ditemukan")
