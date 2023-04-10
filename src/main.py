@@ -119,7 +119,10 @@ def findUCSPath():
         validateInput()
         ucs = UCS(parser.getMap(), int(startChosen.get())-1, parser.getNodeName())
         ucs.find_path_UCS(int(goalChosen.get())-1)
-        updateResult(ucs.getPathResult(), ucs.printPathResult(), ucs.getDistance(), 0)
+        if (ucs.getFoundPath()):
+            updateResult(ucs.getPathResult(), ucs.printPathResult(), ucs.getDistance(), 0)
+        else:
+            canvas.itemconfigure(algorithmExceptionLabel, text="The path does not exist") 
     except Exception as error:
         canvas.itemconfigure(algorithmExceptionLabel, text=error)
 
