@@ -38,7 +38,7 @@ class GraphDrawer:
         # Create the image of graph and save it
         edges = [(u, v) for (u, v, d) in self.graph.edges(data=True)]
         edge_labels = nx.get_edge_attributes(self.graph, "weight")
-        pos = nx.planar_layout(self.graph)
+        pos = nx.spring_layout(self.graph, seed=len(self.nodeName))
 
         nx.draw_networkx_nodes(self.graph, pos, node_size=350, node_color="#EE1AEF")
         nx.draw_networkx_labels(self.graph, pos, font_size=12, font_family="monospace")
@@ -61,7 +61,7 @@ class GraphDrawer:
         normalEdges = [(u, v) for (u, v, d) in self.graph.edges(data=True) if (u, v) not in resultEdge]
         resultEdges = [(u, v) for (u, v, d) in self.graph.edges(data=True) if (u, v) in resultEdge]
         edge_labels = nx.get_edge_attributes(self.graph, "weight")
-        pos = nx.planar_layout(self.graph)
+        pos = nx.spring_layout(self.graph, seed=len(self.nodeName))
 
         nx.draw_networkx_nodes(self.graph, pos, node_size=350, node_color="#EE1AEF")
         nx.draw_networkx_labels(self.graph, pos, font_size=12, font_family="monospace")
