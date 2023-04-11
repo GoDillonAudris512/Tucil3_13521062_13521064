@@ -14,12 +14,12 @@ Tugas Kecil III IF2211 Algorithm Strategies
 Program ini dapat digunakan untuk mencari lintasan terdekat dari suatu simpul ke simpul yang lain pada suatu graf menggunakan algoritma Uniform Cost Search (UCS) dan algoritma A star (A*). Program mendapatkan grafnya berdasarkan input file text yang berisi matriks ketetanggaan beserta nilai heuristiknya.
 
 ## Tampilan Program
-To Be Updated
+![Screenshot](assets/screenshot.jpg)
 
 ## How To Run
 In terminal, move to src folder and run:
 ```shell
-run main.py
+python main.py
 ```
 A window will appear if the program is run successfully!
 
@@ -30,6 +30,8 @@ A window will appear if the program is run successfully!
 ### Requirements
 * Tkinter
 * Pillow
+* Networkx
+* Matplotlib
 
 ## Project Structure
 ```bash
@@ -39,7 +41,7 @@ Tucil3_13521062_13521064
 │    ├──background.png
 │    ├──graph.png
 │    ├──logo.png
-│    └──screenshot.png
+│    └──screenshot.jpg
 │
 ├───doc
 │    └──Tucil3_13521062_13521064.pdf
@@ -58,7 +60,10 @@ Tucil3_13521062_13521064
 ├───test
 │    ├──tc1.txt
 │    ├──tc2.txt
-│    └──tc3.txt
+│    ├──tc3.txt
+│    ├──tc5-Imaginary.txt
+│    ├──tc6-BigImaginary.txt
+│    └──tc7-WrongInput.txt
 │
 └───README.md
 ```

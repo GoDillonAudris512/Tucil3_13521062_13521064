@@ -38,12 +38,16 @@ class GraphDrawer:
         # Create the image of graph and save it
         edges = [(u, v) for (u, v, d) in self.graph.edges(data=True)]
         edge_labels = nx.get_edge_attributes(self.graph, "weight")
-        pos = nx.spring_layout(self.graph, seed=len(self.nodeName))
+        try:
+            pos = nx.planar_layout(self.graph)
+        except:
+            pos = nx.spring_layout(self.graph, seed=len(self.nodeName))
 
         nx.draw_networkx_nodes(self.graph, pos, node_size=350, node_color="#EE1AEF")
         nx.draw_networkx_labels(self.graph, pos, font_size=12, font_family="monospace")
         nx.draw_networkx_edges(self.graph, pos, edgelist=edges, width=2)
-        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels, rotate=False)
+        if (len(self.nodeName) < 15):
+            nx.draw_networkx_edge_labels(self.graph, pos, edge_labels, rotate=False)
 
         ax = plt.gca()
         ax.margins(0.08)
@@ -61,13 +65,17 @@ class GraphDrawer:
         normalEdges = [(u, v) for (u, v, d) in self.graph.edges(data=True) if (u, v) not in resultEdge]
         resultEdges = [(u, v) for (u, v, d) in self.graph.edges(data=True) if (u, v) in resultEdge]
         edge_labels = nx.get_edge_attributes(self.graph, "weight")
-        pos = nx.spring_layout(self.graph, seed=len(self.nodeName))
+        try:
+            pos = nx.planar_layout(self.graph)
+        except:
+            pos = nx.spring_layout(self.graph, seed=len(self.nodeName))
 
         nx.draw_networkx_nodes(self.graph, pos, node_size=350, node_color="#EE1AEF")
         nx.draw_networkx_labels(self.graph, pos, font_size=12, font_family="monospace")
         nx.draw_networkx_edges(self.graph, pos, edgelist=normalEdges, width=2, edge_color="#000000")
-        nx.draw_networkx_edges(self.graph, pos, edgelist=resultEdges, width=2, edge_color="#FFB3C1")
-        nx.draw_networkx_edge_labels(self.graph, pos, edge_labels, rotate=False)
+        nx.draw_networkx_edges(self.graph, pos, edgelist=resultEdges, width=2, edge_color="#FF1100")
+        if (len(self.nodeName) < 15):
+            nx.draw_networkx_edge_labels(self.graph, pos, edge_labels, rotate=False)
 
         ax = plt.gca()
         ax.margins(0.08)
