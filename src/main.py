@@ -1,3 +1,6 @@
+# File : main.py
+# Contains the necessary code to make GUI and implement A* and UCS Algorithm
+ 
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from Helper.Parser import *
