@@ -77,8 +77,8 @@ def askFileName():
             canvas.itemconfigure(parseExceptionLabel, text=error)
 
 # File Chooser Button
-fileChooserButton = Button(canvas, text="\u2b60", font=("Times New Roman", 16), command=askFileName, height= 1, width=4, bg="#EE1AEF")
-fileChooserWindow = canvas.create_window(240, 135, anchor="nw", window=fileChooserButton)
+fileChooserButton = Button(canvas, text="\u2b60", font=("Times New Roman", 11), command=askFileName, height= 1, width=4, bg="#EE1AEF")
+fileChooserWindow = canvas.create_window(245, 135, anchor="nw", window=fileChooserButton)
 
 """========================================= NODE CHOOSING SEGMENT ========================================="""
 # The Option Chosen
