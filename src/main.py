@@ -4,29 +4,38 @@ from Helper.Parser import *
 from Helper.GraphDrawer import *
 from Algorithm.UCS import *
 from Algorithm.AStar import *
+from PIL import Image, ImageTk
 
 """========================================== INITIALIZE SEGMENT =========================================="""
 # Root Window
 root = Tk()
 root.title("PathFinder - Using UCS and A*")
-root.geometry("1920x1080")
+
+# Center the Window
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+window_width = 1080
+window_height = 608
+x = (screen_width // 2) - (window_width // 2)
+y = (screen_height // 2) - (window_height // 2)
+root.geometry(f"{window_width}x{window_height}+{x}+{y - 30}")
 
 # Canvas
 background = PhotoImage(file="../assets/background.png")
-canvas = Canvas(root, width = 1920, height=1080)
+canvas = Canvas(root, width = 1080, height=608)
 canvas.pack(fill="both", expand=True)
 canvas.create_image(0, 0, image = background, anchor = "nw")
 
 # Basic UI Label and Shape
-canvas.create_text(510, 10, anchor="nw", text= "\u2605 Path Finder \u2605", font=("Segoe Script", 43, 'bold'), fill="#FFB3C1")
-canvas.create_text(140, 205, anchor="nw", text= "Choose your graph file!", font=("Times New Roman", 25), fill="#FFFFFF")
-canvas.create_text(140, 375, anchor="nw", text= "Choose the path to find", font=("Times New Roman", 25), fill="#FFFFFF")
-canvas.create_text(140, 420, anchor="nw", text= "Start Node: ", font=("Times New Roman", 20), fill="#FFFFFF")
-canvas.create_text(140, 460, anchor="nw", text= "Goal Node: ", font=("Times New Roman", 20), fill="#FFFFFF")
-canvas.create_text(140, 560, anchor="nw", text= "Choose the algorithm", font=("Times New Roman", 25), fill="#FFFFFF")
-canvas.create_rectangle(0,125, 1920, 130, fill="#EE1AEF")
-canvas.create_rectangle(0,135, 1920, 140, fill="#EE1AEF")
-canvas.create_rectangle(600, 140, 605, 1080, fill="#EE1AEF")
+canvas.create_text(400, 10, anchor="nw", text= "\u2605 Path Finder \u2605", font=("Segoe Script", 25, 'bold'), fill="#FFB3C1")
+canvas.create_text(40, 100, anchor="nw", text= "Choose your graph file!", font=("Georgia", 16), fill="#FFFFFF")
+canvas.create_text(40, 200, anchor="nw", text= "Choose the path to find!", font=("Georgia", 16), fill="#FFFFFF")
+canvas.create_text(40, 240, anchor="nw", text= "Start Node: ", font=("Georgia", 16), fill="#FFFFFF")
+canvas.create_text(40, 280, anchor="nw", text= "Goal Node: ", font=("Georgia", 16), fill="#FFFFFF")
+canvas.create_text(40, 350, anchor="nw", text= "Choose the algorithm!", font=("Georgia", 16), fill="#FFFFFF")
+canvas.create_rectangle(0, 70, 1440, 75, fill="#EE1AEF")
+canvas.create_rectangle(0, 80, 1440, 85, fill="#EE1AEF")
+canvas.create_rectangle(400, 85, 405, 1080, fill="#EE1AEF")
 
 """========================================= FILE CHOOSING SEGMENT ========================================="""
 # Global Variables needed
@@ -37,11 +46,11 @@ valid = False
 # File Name Label
 fileName = StringVar()
 fileName.set("")
-fileNameLabel = Label(canvas, textvariable=fileName, fg="#000000", bg="#FFB3C1", font=("Times New Roman", 21), borderwidth=2, anchor="w", height= 1, width=20, relief="ridge")
-fileNameWindow = canvas.create_window(140, 245, anchor="nw", window=fileNameLabel)
+fileNameLabel = Label(canvas, textvariable=fileName, fg="#000000", bg="#FFB3C1", font=("Times New Roman", 16), borderwidth=2, anchor="w", height= 1, width=20, relief="ridge")
+fileNameWindow = canvas.create_window(40, 135, anchor="nw", window=fileNameLabel)
 
 # Parsing Exception Label
-parseExceptionLabel = canvas.create_text(140, 300, text = "", font=("Times New Roman", 15), fill="#FFFFFF", anchor="w")
+parseExceptionLabel = canvas.create_text(140, 300, text = "", font=("Times New Roman", 16), fill="#FFFFFF", anchor="w")
 
 # Procedure when the choose file button is clicked
 def askFileName():
@@ -68,8 +77,8 @@ def askFileName():
             canvas.itemconfigure(parseExceptionLabel, text=error)
 
 # File Chooser Button
-fileChooserButton = Button(canvas, text="\u2b60", font=("Times New Roman", 15), command=askFileName, height=1, width=4, bg="#EE1AEF")
-fileChooserWindow = canvas.create_window(392, 245, anchor="nw", window=fileChooserButton)
+fileChooserButton = Button(canvas, text="\u2b60", font=("Times New Roman", 16), command=askFileName, height= 1, width=4, bg="#EE1AEF")
+fileChooserWindow = canvas.create_window(240, 135, anchor="nw", window=fileChooserButton)
 
 """========================================= NODE CHOOSING SEGMENT ========================================="""
 # The Option Chosen
@@ -80,12 +89,12 @@ node = [0]
 # Start Node Option Menu
 startNodeOption = OptionMenu(canvas, startChosen, *node)
 startNodeOption.config(height=1, width=5, background="#FFB3C1")
-startNodeWindow = canvas.create_window(275, 420, anchor="nw", window=startNodeOption)
+startNodeWindow = canvas.create_window(160, 240, anchor="nw", window=startNodeOption)
 
 # Goal Node Option Menu
 goalNodeOption = OptionMenu(canvas, goalChosen, *node)
 goalNodeOption.config(height=1, width=5, background="#FFB3C1")
-goalNodeWindow = canvas.create_window(275, 460, anchor="nw", window=goalNodeOption)
+goalNodeWindow = canvas.create_window(160, 280, anchor="nw", window=goalNodeOption)
 
 # Update the nodes option according to the graph file
 def updateOptionNode(row):
@@ -128,7 +137,7 @@ def findUCSPath():
 
 # UCS Button    
 ucsButton = Button(canvas, text="UCS", font=("Times New Roman", 15, 'bold'), command=findUCSPath, height=1, width=8, bg="#EE1AEF")
-ucsWindow = canvas.create_window(140, 600, anchor="nw", window=ucsButton)
+ucsWindow = canvas.create_window(40, 390, anchor="nw", window=ucsButton)
 
 # Start the A* Algorithm
 def findAStarPath():
@@ -146,21 +155,21 @@ def findAStarPath():
 
 # A* Button
 aStarButton = Button(canvas, text="A*", font=("Times New Roman", 15, 'bold'), command=findAStarPath, height=1, width=8, bg="#EE1AEF")
-aStarWindow = canvas.create_window(250, 600, anchor="nw", window=aStarButton)
+aStarWindow = canvas.create_window(175, 390, anchor="nw", window=aStarButton)
 
 """========================================= SHOWING RESULT SEGMENT ========================================="""
 # Graph Image
 graphImage = PhotoImage(file="../assets/logo.png")
-graphWindow = canvas.create_image(760, 200, anchor="nw", image=graphImage)
+graphWindow = canvas.create_image(430, 125, anchor="nw", image=graphImage)
 
 # Algorithm Used Label
-algorithmUsedLabel = canvas.create_text(760, 700, text = "", font=("Times New Roman", 17), fill="#FFFFFF", anchor="w")
+algorithmUsedLabel = canvas.create_text(430, 510, text = "", font=("Georgia", 12), fill="#FFFFFF", anchor="w")
 
 # Result Path Label
-resultPathLabel = canvas.create_text(760, 725, text = "", font=("Times New Roman", 17), fill="#FFFFFF", anchor="w")
+resultPathLabel = canvas.create_text(430, 540, text = "", font=("Georgia", 12), fill="#FFFFFF", anchor="w")
 
 # Distance Label
-distanceLabel = canvas.create_text(760, 750, text = "", font=("Times New Roman", 17), fill="#FFFFFF", anchor="w")
+distanceLabel = canvas.create_text(430, 570, text = "", font=("Georgia", 12), fill="#FFFFFF", anchor="w")
 
 # Update result according to parameter
 def updateResult(resultPath, pathName, distance, flag):
@@ -178,7 +187,17 @@ def updateResult(resultPath, pathName, distance, flag):
         canvas.itemconfigure(algorithmUsedLabel, text="")
         canvas.itemconfigure(resultPathLabel, text="")
         canvas.itemconfigure(distanceLabel, text="")
-    graphImage = PhotoImage(file="../assets/graph.png")
+    # graphImage = PhotoImage(file="../assets/graph.png")
+    # Open the image file
+    image = Image.open("../assets/graph.png")
+
+    # Calculate the new size
+    new_width = int(image.width * 0.75)
+    new_height = int(image.height * 0.75)
+
+    # Resize the image
+    resized_image = image.resize((new_width, new_height), Image.ANTIALIAS)
+    graphImage = ImageTk.PhotoImage(resized_image)
     canvas.itemconfigure(graphWindow, image=graphImage)
 
 
