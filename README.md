@@ -58,9 +58,10 @@ Tucil3_13521062_13521064
 │    └──main.py
 │
 ├───test
-│    ├──tc1.txt
-│    ├──tc2.txt
-│    ├──tc3.txt
+│    ├──tc1-KampusITB.txt
+│    ├──tc2-AlunAlunBandung.txt
+│    ├──tc3-BuahBatu.txt
+│    ├──tc4-AlunAlunJember.txt
 │    ├──tc5-Imaginary.txt
 │    ├──tc6-BigImaginary.txt
 │    └──tc7-WrongInput.txt
