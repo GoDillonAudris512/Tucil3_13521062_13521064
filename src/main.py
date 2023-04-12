@@ -191,7 +191,7 @@ def updateResult(resultPath, pathName, distance, flag):
         canvas.itemconfigure(algorithmUsedLabel, text="")
         canvas.itemconfigure(resultPathLabel, text="")
         canvas.itemconfigure(distanceLabel, text="")
-    # graphImage = PhotoImage(file="../assets/graph.png")
+        
     # Open the image file
     image = Image.open("../assets/graph.png")
 
